@@ -3,7 +3,7 @@
 
     <application
         android:allowBackup="true"
-        android:label="NotasComposeApp"
+        android:label="Promedio Estudiantil"
         android:supportsRtl="true"
         android:theme="@style/Theme.NotasComposeApp">
         <activity
