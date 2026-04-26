@@ -42,7 +42,7 @@ fun RegisterScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "Registro de usuario",
+            text = "Registro de cuenta académica",
             style = MaterialTheme.typography.headlineSmall,
             color = MaterialTheme.colorScheme.primary,
             fontWeight = FontWeight.Bold
@@ -54,7 +54,7 @@ fun RegisterScreen(
                 OutlinedTextField(
                     value = username,
                     onValueChange = { username = it },
-                    label = { Text("Nuevo usuario") },
+                    label = { Text("Usuario institucional") },
                     modifier = Modifier.fillMaxWidth(),
                     singleLine = true
                 )
@@ -62,7 +62,7 @@ fun RegisterScreen(
                 OutlinedTextField(
                     value = password,
                     onValueChange = { password = it },
-                    label = { Text("Nueva contraseña") },
+                    label = { Text("Contraseña") },
                     modifier = Modifier.fillMaxWidth(),
                     visualTransformation = PasswordVisualTransformation(),
                     singleLine = true
@@ -107,7 +107,7 @@ fun RegisterScreen(
                     onClick = onBackToLogin,
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    Text("Volver al login")
+                    Text("Volver al inicio de sesión")
                 }
             }
         }
