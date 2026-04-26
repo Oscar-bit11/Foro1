@@ -29,31 +29,6 @@ Reglas implementadas:
 - **Navigation Compose**
 - **Android Gradle Plugin + Gradle Kotlin DSL**
 
-## Cómo ejecutar el proyecto
-
-1. Abrir la carpeta del proyecto en **Android Studio**.
-2. Esperar sincronización de Gradle.
-3. Ejecutar en emulador o dispositivo físico (API 24+).
-
-### Comando opcional por terminal
-
-```bash
-./gradlew assembleDebug
-```
-
-## Flujo de pantallas
-
-- `LoginScreen`
-  - Botón **Ingresar** → `HomeScreen`
-  - Botón **Registrarse** → `RegisterScreen`
-- `RegisterScreen`
-  - Botón **Crear cuenta** (validando datos) → vuelve a `LoginScreen`
-  - Botón **Volver al login** → `LoginScreen`
-- `HomeScreen`
-  - Botón **Calcular promedio** → `ResultScreen`
-- `ResultScreen`
-  - Botón **Ingresar nuevas notas** → `HomeScreen`
-
 ## Estructura principal
 
 - `app/src/main/java/com/example/notascomposeapp/MainActivity.kt`
@@ -62,6 +37,3 @@ Reglas implementadas:
 - `app/src/main/java/com/example/notascomposeapp/screens/RegisterScreen.kt`
 - `app/src/main/java/com/example/notascomposeapp/screens/HomeScreen.kt`
 - `app/src/main/java/com/example/notascomposeapp/screens/ResultScreen.kt`
-
----
-Diseño orientado a una defensa universitaria: código simple, legible y fácil de explicar.
