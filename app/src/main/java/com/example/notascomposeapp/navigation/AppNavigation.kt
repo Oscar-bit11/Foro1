@@ -37,17 +37,20 @@ fun AppNavigation() {
 
         composable("home") {
             HomeScreen(
-                onCalculate = { studentName, note1, note2, note3, average, status ->
-                    val route = "result/${Uri.encode(studentName)}/$note1/$note2/$note3/$average/${Uri.encode(status)}"
+                onCalculate = { studentName, carnet, subject, term, note1, note2, note3, average, status ->
+                    val route = "result/${Uri.encode(studentName)}/${Uri.encode(carnet)}/${Uri.encode(subject)}/${Uri.encode(term)}/$note1/$note2/$note3/$average/${Uri.encode(status)}"
                     navController.navigate(route)
                 }
             )
         }
 
         composable(
-            route = "result/{name}/{note1}/{note2}/{note3}/{average}/{status}",
+            route = "result/{name}/{carnet}/{subject}/{term}/{note1}/{note2}/{note3}/{average}/{status}",
             arguments = listOf(
                 navArgument("name") { type = NavType.StringType },
+                navArgument("carnet") { type = NavType.StringType },
+                navArgument("subject") { type = NavType.StringType },
+                navArgument("term") { type = NavType.StringType },
                 navArgument("note1") { type = NavType.FloatType },
                 navArgument("note2") { type = NavType.FloatType },
                 navArgument("note3") { type = NavType.FloatType },
@@ -57,6 +60,9 @@ fun AppNavigation() {
         ) { backStackEntry ->
             ResultScreen(
                 studentName = backStackEntry.arguments?.getString("name").orEmpty(),
+                carnet = backStackEntry.arguments?.getString("carnet").orEmpty(),
+                subject = backStackEntry.arguments?.getString("subject").orEmpty(),
+                term = backStackEntry.arguments?.getString("term").orEmpty(),
                 note1 = backStackEntry.arguments?.getFloat("note1") ?: 0f,
                 note2 = backStackEntry.arguments?.getFloat("note2") ?: 0f,
                 note3 = backStackEntry.arguments?.getFloat("note3") ?: 0f,

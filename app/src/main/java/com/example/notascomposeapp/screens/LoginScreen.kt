@@ -42,14 +42,14 @@ fun LoginScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "NotasComposeApp",
+            text = "Promedio Estudiantil",
             style = MaterialTheme.typography.headlineMedium,
             color = MaterialTheme.colorScheme.primary,
             fontWeight = FontWeight.Bold
         )
         Spacer(modifier = Modifier.height(12.dp))
         Text(
-            text = "Bienvenido 👋",
+            text = "Bienvenido al portal académico",
             style = MaterialTheme.typography.titleMedium
         )
         Spacer(modifier = Modifier.height(20.dp))
@@ -59,7 +59,7 @@ fun LoginScreen(
                 OutlinedTextField(
                     value = username,
                     onValueChange = { username = it },
-                    label = { Text("Usuario") },
+                    label = { Text("Usuario institucional") },
                     modifier = Modifier.fillMaxWidth(),
                     singleLine = true
                 )
@@ -91,14 +91,14 @@ fun LoginScreen(
                     },
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    Text("Ingresar")
+                    Text("Iniciar sesión")
                 }
                 Spacer(modifier = Modifier.height(8.dp))
                 Button(
                     onClick = onRegisterClick,
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    Text("Registrarse")
+                    Text("Crear cuenta")
                 }
             }
         }
