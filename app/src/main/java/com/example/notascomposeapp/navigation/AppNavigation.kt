@@ -2,6 +2,7 @@ package com.example.notascomposeapp.navigation
 
 import android.net.Uri
 import androidx.compose.runtime.Composable
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -11,21 +12,27 @@ import com.example.notascomposeapp.screens.HomeScreen
 import com.example.notascomposeapp.screens.LoginScreen
 import com.example.notascomposeapp.screens.RegisterScreen
 import com.example.notascomposeapp.screens.ResultScreen
+import com.example.notascomposeapp.viewmodel.AuthViewModel
 
 @Composable
 fun AppNavigation() {
     val navController = rememberNavController()
+    val authViewModel: AuthViewModel = viewModel()
 
     NavHost(navController = navController, startDestination = "login") {
         composable("login") {
             LoginScreen(
-                onLoginClick = { navController.navigate("home") },
+                authViewModel = authViewModel,
+                onLoginSuccess = { navController.navigate("home") },
                 onRegisterClick = { navController.navigate("register") }
             )
         }
 
         composable("register") {
-            RegisterScreen(onBackToLogin = { navController.popBackStack() })
+            RegisterScreen(
+                authViewModel = authViewModel,
+                onBackToLogin = { navController.popBackStack() }
+            )
         }
 
         composable("home") {
