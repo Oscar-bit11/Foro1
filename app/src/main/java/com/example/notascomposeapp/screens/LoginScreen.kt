@@ -15,21 +15,24 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
+import com.example.notascomposeapp.viewmodel.AuthViewModel
 
 @Composable
 fun LoginScreen(
-    onLoginClick: () -> Unit,
+    authViewModel: AuthViewModel,
+    onLoginSuccess: () -> Unit,
     onRegisterClick: () -> Unit
 ) {
-    var username by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
+    var username by rememberSaveable { mutableStateOf("") }
+    var password by rememberSaveable { mutableStateOf("") }
+    var errorMessage by rememberSaveable { mutableStateOf<String?>(null) }
 
     Column(
         modifier = Modifier
@@ -69,9 +72,23 @@ fun LoginScreen(
                     modifier = Modifier.fillMaxWidth(),
                     singleLine = true
                 )
+
+                errorMessage?.let {
+                    Spacer(modifier = Modifier.height(12.dp))
+                    Text(text = it, color = MaterialTheme.colorScheme.error)
+                }
+
                 Spacer(modifier = Modifier.height(16.dp))
                 Button(
-                    onClick = onLoginClick,
+                    onClick = {
+                        val loginError = authViewModel.loginUser(username, password)
+                        if (loginError == null) {
+                            errorMessage = null
+                            onLoginSuccess()
+                        } else {
+                            errorMessage = loginError
+                        }
+                    },
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Text("Ingresar")

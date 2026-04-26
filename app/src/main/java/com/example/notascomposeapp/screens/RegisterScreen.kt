@@ -15,20 +15,24 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
+import com.example.notascomposeapp.viewmodel.AuthViewModel
 
 @Composable
-fun RegisterScreen(onBackToLogin: () -> Unit) {
-    var username by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
-    var confirmPassword by remember { mutableStateOf("") }
-    var errorMessage by remember { mutableStateOf<String?>(null) }
+fun RegisterScreen(
+    authViewModel: AuthViewModel,
+    onBackToLogin: () -> Unit
+) {
+    var username by rememberSaveable { mutableStateOf("") }
+    var password by rememberSaveable { mutableStateOf("") }
+    var confirmPassword by rememberSaveable { mutableStateOf("") }
+    var errorMessage by rememberSaveable { mutableStateOf<String?>(null) }
 
     Column(
         modifier = Modifier
@@ -88,7 +92,9 @@ fun RegisterScreen(onBackToLogin: () -> Unit) {
                             password != confirmPassword -> "Las contraseñas no coinciden."
                             else -> null
                         }
+
                         if (errorMessage == null) {
+                            authViewModel.registerUser(username, password)
                             onBackToLogin()
                         }
                     },
